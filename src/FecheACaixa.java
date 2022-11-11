@@ -1,3 +1,5 @@
+
+//fazer um if pra conferir se a soma das caixas informadas não ultrapassa o limite
 import java.util.Scanner;
 import java.util.Random;
 
@@ -10,13 +12,15 @@ public class FecheACaixa {
         String[] tabuleiro = { "[1]", "[2]", "[3]", "[4]", "[5]", "[6]", "[7]", "[8]", "[9]" };
         String[] tabuleiroDemonstrativo = { "[1]", "[2]", "[3]", "[4]", "[5]", "[6]", "[7]", "[8]", "[9]" };
         String[] casasInformadas = new String[10];
+        int[] casasInformadasPonteiro = new int[10];
         int[] casasInformadasIndices = new int[10];
         int contadorCasas = 0, pontuacao = 0;
         System.out.println("Nome do jogador: ");
         String nomeJogador = in.nextLine();
-        boolean condicao = true;
+        boolean condicao = true, lancamentoAtivo = false;
         int dado1 = 0, dado2 = 0, somaDados = 0, somaCaixas = 0;
         // mostrarTabuleiro(tabuleiro);
+
         while (condicao == true) {
             mostrarTabuleiro(tabuleiro);
             System.out.println();
@@ -26,56 +30,102 @@ public class FecheACaixa {
             Scanner scanner = new Scanner(opcao);
             if (scanner.hasNextInt() == false) {
 
-                if (opcao.trim().toUpperCase().equals("L") || opcao.trim().toUpperCase().equals("LANÇAR")) {
+                if (lancamentoAtivo == false
+                        && (opcao.trim().toUpperCase().equals("L") || opcao.trim().toUpperCase().equals("LANÇAR"))) {
                     somaDados = 0;
                     dado1 = gerarNumeroAleatorio(1, 9);
                     dado2 = gerarNumeroAleatorio(1, 9);
                     somaDados = dado1 + dado2;
-                    System.out.printf("Resultado do lançamento\n: %d e %d", dado1, dado2);
+                    System.out.printf("Resultado do lançamento:\n%d e %d\n", dado1, dado2);
                     System.out.println();
-                }
+                    lancamentoAtivo = true;
 
-                if (opcao.trim().toUpperCase().equals("F") || opcao.trim().toUpperCase().equals("FECHAR")) {
-                    // System.out.println(somaCaixas);
-                    // System.out.println(somaDados);
-                    if (somaCaixas > somaDados && somaDados != 0) {
-                        System.out.println(
-                                "Jogada Inválida!!!\nA soma dos dados não condiz com a(s) casa(s) que deseja fechar.");
-                        somaCaixas = 0;
-                    } else if (somaDados == 0) {
-                        System.out.println(
-                                "Jogada Inválida!!!\nÉ necessário lançar os dados antes de fechar as caixas.");
-                        somaCaixas = 0;
-                    } else {
-                        for (int i = 0; i < casasInformadas.length; i++) {
-                            if (busca(tabuleiro, tabuleiro.length, casasInformadas[i]) == true) {
-                                tabuleiro[casasInformadasIndices[i]] = "[X]";
-                            }
-                        }
-                        mostrarTabuleiro(tabuleiro);
+                } else if (lancamentoAtivo == true
+                        && (opcao.trim().toUpperCase().equals("L") || opcao.trim().toUpperCase().equals("LANÇAR"))) {
+                    System.out.printf("Atenção!!! Dados já foram lançados!!! %d e %d\n", dado1, dado2);
+                    System.out.println();
+
+                } else if (opcao.trim().toUpperCase().equals("P") || opcao.trim().toUpperCase().equals("PASSAR")) {
+                    if (lancamentoAtivo == false) {
+                        System.out.println("Atenção!!! É necessário lançar os dados antes de passar a jogada!!!\n");
                         System.out.println();
-                        pontuacao = somaDados - somaCaixas;
-                        somaDados = 0;
+                    } else {
+                        pontuacao += somaDados;
+                        lancamentoAtivo = false;
                     }
-                    somaCaixas = 0;
-                    contadorCasas = 0;
+                } else if (opcao.trim().toUpperCase().equals("F") || opcao.trim().toUpperCase().equals("FECHAR")) {
+                    if (lancamentoAtivo == false) {
+                        System.out.println("Atenção!!! É necessário lançar os dados antes de fechar as casas!!!\n");
+                        System.out.println();
+                    } else {
+                        if (somaCaixas > somaDados && somaDados != 0 || somaCaixas == 0) {
+                            System.out.println(
+                                    "Jogada Inválida!!!\nA soma dos dados não condiz com a(s) casa(s) que deseja fechar.");
+                            somaCaixas = 0;
+                            System.out.println();
+                        } else if (somaDados == 0) {
+                            System.out.println(
+                                    "Jogada Inválida!!!\nÉ necessário lançar os dados antes de fechar as caixas.");
+                            System.out.println();
+                            // somaCaixas = 0;
+                        }
+
+                        else {
+                            for (int i = 0; i < contadorCasas; i++) {
+                                if (busca(tabuleiro, tabuleiro.length, casasInformadas[i]) == true) {
+                                    tabuleiro[casasInformadasIndices[i]] = "[X]";
+                                }
+                            }
+                            // mostrarTabuleiro(tabuleiro);
+                            System.out.println();
+                            pontuacao = somaDados - somaCaixas;
+                            somaDados = 0;
+                            lancamentoAtivo = false;
+                        }
+                        somaCaixas = 0;
+                        contadorCasas = 0;
+
+                    }
                 }
 
-                if (opcao.trim().toUpperCase().equals("S") || opcao.trim().toUpperCase().equals("SAIR")) {
+                else if (opcao.trim().toUpperCase().equals("S") || opcao.trim().toUpperCase().equals("SAIR")) {
                     System.out.println("Partida encerrada!");
-                    System.exit(0);
+                    break;
+                    // System.exit(0);
+                } else {
+                    System.out.println("Comando inexistente. Tente novamente!");
                 }
+
             }
             // caso a entrada seja um inteiro
             else {
+                if (lancamentoAtivo == true && Integer.parseInt(opcao) >= 1 && Integer.parseInt(opcao) <= 9) {
+                    casasInformadasPonteiro[contadorCasas] = Integer.parseInt(opcao);
+                    casasInformadas[contadorCasas] = "[" + opcao + "]";
+                    casasInformadasIndices[contadorCasas] = Integer.parseInt(opcao) - 1;
+                    contadorCasas++;
+                    somaCaixas += Integer.parseInt(opcao);
+                    // mostrarTabuleiro(tabuleiro);
+                    System.out.println();
+                    System.out.print("Casas selecionadas ");
+                    for (int i = 0; i < contadorCasas; i++) {
+                        System.out.print(casasInformadas[i] + " "); // preciso acessar todos os
+                        // "opcao"
+                        // informados
+                    }
+                    System.out.println("\n");
+                    // tabuleiroDemonstrativo[Integer.parseInt(opcao) - 1] = " < " +
+                    // tabuleiro[Integer.parseInt(opcao) - 1]
+                    // + " > ";
+                    // mostrarTabuleiro(tabuleiroDemonstrativo);
+                } else if (lancamentoAtivo == false) {
+                    System.out.println("Atenção!!! É necessário lançar os dados antes de selecionar as casas!!!\n");
+                    System.out.println();
+                }
 
-                casasInformadas[contadorCasas] = "[" + opcao + "]";
-                casasInformadasIndices[contadorCasas] = Integer.parseInt(opcao) - 1;
-                contadorCasas++;
-                somaCaixas += Integer.parseInt(opcao);
-                tabuleiroDemonstrativo[Integer.parseInt(opcao) - 1] = " < " + tabuleiro[Integer.parseInt(opcao) - 1]
-                        + " > ";
-                mostrarTabuleiro(tabuleiroDemonstrativo);
+                else {
+                    System.out.println("Casa inexistente. Tente novamente!");
+                }
             }
         }
     }
