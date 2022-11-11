@@ -15,7 +15,7 @@ public class FecheACaixa {
         int[] casasInformadasPonteiro = new int[10];
         int[] casasInformadasIndices = new int[10];
         int contadorCasas = 0, pontuacao = 0;
-        System.out.println("Nome do jogador: ");
+        System.out.print("Nome do jogador: ");
         String nomeJogador = in.nextLine();
         boolean condicao = true, lancamentoAtivo = false;
         int dado1 = 0, dado2 = 0, somaDados = 0, somaCaixas = 0;
@@ -57,6 +57,11 @@ public class FecheACaixa {
                     if (lancamentoAtivo == false) {
                         System.out.println("Atenção!!! É necessário lançar os dados antes de fechar as casas!!!\n");
                         System.out.println();
+                        if (contadorCasas == 0) {
+                            System.out
+                                    .println("Atenção!!! É necessário selecionar pelo menos uma casa para fechar!!!\n");
+                            System.out.println();
+                        }
                     } else {
                         if (somaCaixas > somaDados && somaDados != 0 || somaCaixas == 0) {
                             System.out.println(
@@ -124,7 +129,8 @@ public class FecheACaixa {
                 }
 
                 else {
-                    System.out.println("Casa inexistente. Tente novamente!");
+                    System.out.println("Casa inexistente. Tente novamente!"); // arrumar para número ser diferente de
+                                                                              // casa, usar try e catch
                 }
             }
         }
