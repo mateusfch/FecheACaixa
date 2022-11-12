@@ -11,6 +11,7 @@ public class FecheACaixa {
         System.out.println("----- FECHE A CAIXA ------");
         String[] tabuleiro = { "[1]", "[2]", "[3]", "[4]", "[5]", "[6]", "[7]", "[8]", "[9]" };
         String[] tabuleiroDemonstrativo = { "[1]", "[2]", "[3]", "[4]", "[5]", "[6]", "[7]", "[8]", "[9]" };
+        boolean[] casasFechamento = { false, false, false, false, false, false, false, false, false };
         String[] casasInformadas = new String[10];
         int[] casasInformadasPonteiro = new int[10];
         int[] casasInformadasIndices = new int[10];
@@ -33,16 +34,27 @@ public class FecheACaixa {
                 if (lancamentoAtivo == false
                         && (opcao.trim().toUpperCase().equals("L") || opcao.trim().toUpperCase().equals("LANÇAR"))) {
                     somaDados = 0;
-                    dado1 = gerarNumeroAleatorio(1, 9);
-                    dado2 = gerarNumeroAleatorio(1, 9);
-                    somaDados = dado1 + dado2;
-                    System.out.printf("Resultado do lançamento:\n%d e %d\n", dado1, dado2);
+                    if (casasFechamento[6] == false || casasFechamento[7] == false || casasFechamento[8] == false) {
+                        dado1 = gerarNumeroAleatorio(1, 9);
+                        dado2 = gerarNumeroAleatorio(1, 9);
+                        somaDados = dado1 + dado2;
+                        System.out.printf("Resultado do lançamento:\n%d e %d\n", dado1, dado2);
+                    } else {
+                        dado1 = gerarNumeroAleatorio(1, 9);
+                        somaDados = dado1;
+                        System.out.printf("Resultado do lançamento:\n%d\n", dado1);
+
+                    }
                     System.out.println();
                     lancamentoAtivo = true;
 
                 } else if (lancamentoAtivo == true
                         && (opcao.trim().toUpperCase().equals("L") || opcao.trim().toUpperCase().equals("LANÇAR"))) {
-                    System.out.printf("Atenção!!! Dados já foram lançados!!! %d e %d\n", dado1, dado2);
+                    if (casasFechamento[6] == false || casasFechamento[7] == false || casasFechamento[8] == false) {
+                        System.out.printf("Atenção!!! Dados já foram lançados!!! %d e %d\n", dado1, dado2);
+                    } else {
+                        System.out.printf("Atenção!!! O dado já foi lançado!!! %d\n", dado1);
+                    }
                     System.out.println();
 
                 } else if (opcao.trim().toUpperCase().equals("P") || opcao.trim().toUpperCase().equals("PASSAR")) {
@@ -57,13 +69,15 @@ public class FecheACaixa {
                     if (lancamentoAtivo == false) {
                         System.out.println("Atenção!!! É necessário lançar os dados antes de fechar as casas!!!\n");
                         System.out.println();
-                        if (contadorCasas == 0) {
-                            System.out
-                                    .println("Atenção!!! É necessário selecionar pelo menos uma casa para fechar!!!\n");
-                            System.out.println();
-                        }
+                    } else if (contadorCasas == 0) {
+                        System.out
+                                .println("Atenção!!! É necessário selecionar pelo menos uma casa para fechar!!!\n");
+                        System.out.println();
+                        // } else if (casasFechamento[Integer.parseInt(opcao) - 1] == true) {
+                        // System.out.println("Atenção!!! Esta casa já se encontra fechada");
+                        // }
                     } else {
-                        if (somaCaixas > somaDados && somaDados != 0 || somaCaixas == 0) {
+                        if (somaCaixas != somaDados && somaDados != 0 || somaCaixas == 0) {
                             System.out.println(
                                     "Jogada Inválida!!!\nA soma dos dados não condiz com a(s) casa(s) que deseja fechar.");
                             somaCaixas = 0;
@@ -79,6 +93,7 @@ public class FecheACaixa {
                             for (int i = 0; i < contadorCasas; i++) {
                                 if (busca(tabuleiro, tabuleiro.length, casasInformadas[i]) == true) {
                                     tabuleiro[casasInformadasIndices[i]] = "[X]";
+                                    casasFechamento[casasInformadasIndices[i]] = true;
                                 }
                             }
                             // mostrarTabuleiro(tabuleiro);
@@ -104,8 +119,9 @@ public class FecheACaixa {
             }
             // caso a entrada seja um inteiro
             else {
-                if (lancamentoAtivo == true && Integer.parseInt(opcao) >= 1 && Integer.parseInt(opcao) <= 9) {
-                    casasInformadasPonteiro[contadorCasas] = Integer.parseInt(opcao);
+                if (lancamentoAtivo == true && Integer.parseInt(opcao) >= 1 && Integer.parseInt(opcao) <= 9
+                        && casasFechamento[Integer.parseInt(opcao) - 1] == false) {
+                    // casasInformadasPonteiro[contadorCasas] = Integer.parseInt(opcao);
                     casasInformadas[contadorCasas] = "[" + opcao + "]";
                     casasInformadasIndices[contadorCasas] = Integer.parseInt(opcao) - 1;
                     contadorCasas++;
@@ -126,6 +142,9 @@ public class FecheACaixa {
                 } else if (lancamentoAtivo == false) {
                     System.out.println("Atenção!!! É necessário lançar os dados antes de selecionar as casas!!!\n");
                     System.out.println();
+                } else if (casasFechamento[Integer.parseInt(opcao) - 1] == true) {
+                    System.out.println("Atenção!!! Esta casa já se encontra fechada, informe outra.");
+
                 }
 
                 else {
