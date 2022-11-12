@@ -19,10 +19,15 @@ public class FecheACaixa {
         System.out.print("Nome do jogador: ");
         String nomeJogador = in.nextLine();
         boolean condicao = true, lancamentoAtivo = false;
-        int dado1 = 0, dado2 = 0, somaDados = 0, somaCaixas = 0;
+        int dado1 = 0, dado2 = 0, somaDados = 0, somaCaixas = 0, contador = 0;
         // mostrarTabuleiro(tabuleiro);
 
-        while (condicao == true) {
+        while (true) {
+            if (buscaBoolean(casasFechamento, casasFechamento.length, false) == 0) {
+                System.out.printf("Parabéns, %s, todas as casas foram fechadas!\nA sua pontuação final é: %d pontos",
+                        nomeJogador, pontuacao);
+                break;
+            }
             mostrarTabuleiro(tabuleiro);
             System.out.println();
             System.out.println("(L)ançar, (P)assar, (F)echar, (S)air ou informe a(s) casa(s) que deseja fechar ");
@@ -98,7 +103,6 @@ public class FecheACaixa {
                             }
                             // mostrarTabuleiro(tabuleiro);
                             System.out.println();
-                            pontuacao = somaDados - somaCaixas;
                             somaDados = 0;
                             lancamentoAtivo = false;
                         }
@@ -187,7 +191,18 @@ public class FecheACaixa {
         return false;
 
     }
+
+    public static int buscaBoolean(boolean[] v, int t, boolean n) {
+        int contador = 0;
+        for (int i = 0; i < t; i++) {
+            if (v[i] == n) {
+                contador++;
+            }
+        }
+        return contador;
+    }
 }
+
 // if (opcao.trim().toUpperCase().equals("F") ||
 // opcao.trim().toUpperCase().equals("FECHAR")) {
 // if (somaVetor(casasInformadas) != somaDados) {
