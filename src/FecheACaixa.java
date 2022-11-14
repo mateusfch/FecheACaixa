@@ -174,7 +174,7 @@ public class FecheACaixa {
         }
         // System.out.println(lnr.getLineNumber());
         if (lnr.getLineNumber() < 10) {
-            Placar.adiciona("placar.txt", nomeJogador, pontuacao);
+            Placar.adiciona("placar.txt", nomeJogador, pontuacao, lnr.getLineNumber());
         } else {
             Placar.atualiza("placar.txt", nomeJogador, pontuacao);
         }

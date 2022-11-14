@@ -41,11 +41,52 @@ public class Placar {
     inFile.close();
   }
 
-  public static void adiciona(String arquivo, String nome, int pontos) throws FileNotFoundException {
+  // public static void adiciona(String arquivo, String nome, int pontos) throws
+  // FileNotFoundException {
+  // try {
+  // FileWriter fw;
+  // fw = new FileWriter(arquivo, true);
+  // fw.write(nome + ";" + pontos + "\n");
+  // fw.close();
+  // } catch (Exception e) {
+  // System.out.println("Erro " + e.getMessage());
+  // }
+  // }
+  public static void adiciona(String arquivo, String nome, int pontos, int numLinhas) throws FileNotFoundException {
     try {
       FileWriter fw;
       fw = new FileWriter(arquivo, true);
       fw.write(nome + ";" + pontos + "\n");
+      fw.close();
+    } catch (Exception e) {
+      System.out.println("Erro " + e.getMessage());
+    }
+    Scanner inFile = new Scanner(new File(arquivo));
+    int contador = 0;
+    int[] scores = new int[numLinhas + 1];
+    String[] names = new String[numLinhas + 1];
+
+    while (inFile.hasNextLine()) {
+      String linha = inFile.nextLine();
+      String[] campos = linha.split(";");
+      names[contador] = campos[0];
+      scores[contador] = Integer.parseInt(campos[1]);
+      contador++;
+    }
+    bubbleSort(scores, names);
+
+    try {
+      new FileWriter(arquivo, false).close();
+    } catch (java.io.IOException ioe) {
+      ioe.printStackTrace();
+    }
+
+    try {
+      FileWriter fw;
+      fw = new FileWriter(arquivo, true);
+      for (int i = 0; i < numLinhas + 1; i++) {
+        fw.write(names[i] + ";" + scores[i] + "\n");
+      }
       fw.close();
     } catch (Exception e) {
       System.out.println("Erro " + e.getMessage());
