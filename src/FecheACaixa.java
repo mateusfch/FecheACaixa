@@ -1,14 +1,20 @@
 
 //fazer um if pra conferir se a soma das caixas informadas não ultrapassa o limite
+//CORRIGIR URGENTEMENTE: se cair 2 e 3, por exemplo, ele deixa selecionar como casas para fechar 1, 1 e 3, ou seja, deixa repetir.
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.LineNumberReader;
 import java.util.Random;
 
 public class FecheACaixa {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner in = new Scanner(System.in);
 
-        System.out.println("----- FECHE A CAIXA ------");
+        System.out.println("------ FECHE A CAIXA -----");
         String[] tabuleiro = { "[1]", "[2]", "[3]", "[4]", "[5]", "[6]", "[7]", "[8]", "[9]" };
         String[] tabuleiroDemonstrativo = { "[1]", "[2]", "[3]", "[4]", "[5]", "[6]", "[7]", "[8]", "[9]" };
         boolean[] casasFechamento = { false, false, false, false, false, false, false, false, false };
@@ -157,6 +163,23 @@ public class FecheACaixa {
                 }
             }
         }
+        FileWriter fw;
+        fw = new FileWriter("placar.txt", true);
+
+        LineNumberReader lnr = new LineNumberReader(new FileReader("placar.txt"));
+        try {
+            lnr.skip(Long.MAX_VALUE);
+        } catch (java.io.IOException ioe) {
+            ioe.printStackTrace();
+        }
+        // System.out.println(lnr.getLineNumber());
+        if (lnr.getLineNumber() < 10) {
+            Placar.adiciona("placar.txt", nomeJogador, pontuacao);
+        } else {
+            Placar.atualiza("placar.txt", nomeJogador, pontuacao);
+        }
+        Placar.mostra("placar.txt");
+        fw.close();
     }
 
     public static int gerarNumeroAleatorio(int minimo, int maximo) {
