@@ -1,10 +1,5 @@
-saf;4
-j;6
-eqeqe;6
-121;10
-m;11
-lal;13
-salvador;14
-saf;15
-sa;17
-ksa;29
+antony;28
+julho;44
+da;77
+laurel;96
+paula;131

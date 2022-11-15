@@ -1,6 +1,3 @@
-
-//fazer um if pra conferir se a soma das caixas informadas não ultrapassa o limite
-//CORRIGIR URGENTEMENTE: se cair 2 e 3, por exemplo, ele deixa selecionar como casas para fechar 1, 1 e 3, ou seja, deixa repetir.
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileReader;
@@ -24,7 +21,7 @@ public class FecheACaixa {
         int contadorCasas = 0, pontuacao = 0;
         System.out.print("Nome do jogador: ");
         String nomeJogador = in.nextLine();
-        boolean condicao = true, lancamentoAtivo = false;
+        boolean abandonouPartida = false, lancamentoAtivo = false;
         int dado1 = 0, dado2 = 0, somaDados = 0, somaCaixas = 0, contador = 0;
         // mostrarTabuleiro(tabuleiro);
 
@@ -119,7 +116,9 @@ public class FecheACaixa {
                 }
 
                 else if (opcao.trim().toUpperCase().equals("S") || opcao.trim().toUpperCase().equals("SAIR")) {
+                    abandonouPartida = true;
                     System.out.println("Partida encerrada!");
+                    Placar.mostra("placar.txt");
                     break;
                     // System.exit(0);
                 } else {
@@ -131,12 +130,28 @@ public class FecheACaixa {
             else {
                 if (lancamentoAtivo == true && Integer.parseInt(opcao) >= 1 && Integer.parseInt(opcao) <= 9
                         && casasFechamento[Integer.parseInt(opcao) - 1] == false) {
-                    // casasInformadasPonteiro[contadorCasas] = Integer.parseInt(opcao);
-                    casasInformadas[contadorCasas] = "[" + opcao + "]";
-                    casasInformadasIndices[contadorCasas] = Integer.parseInt(opcao) - 1;
-                    contadorCasas++;
-                    somaCaixas += Integer.parseInt(opcao);
-                    // mostrarTabuleiro(tabuleiro);
+
+                    if (busca(casasInformadas, contadorCasas, "[" + opcao + "]") == false) {
+                        casasInformadas[contadorCasas] = "[" + opcao + "]";
+                        casasInformadasIndices[contadorCasas] = Integer.parseInt(opcao) - 1;
+                        contadorCasas++;
+                        somaCaixas += Integer.parseInt(opcao);
+                        // mostrarTabuleiro(tabuleiro);
+                        System.out.println();
+                        System.out.print("Casas selecionadas ");
+                        for (int i = 0; i < contadorCasas; i++) {
+                            System.out.print(casasInformadas[i] + " ");
+
+                        }
+                        System.out.println("\n");
+                    } else {
+                        System.out.println("Atenção!!! Casa já selecionada!!!\n");
+                    }
+                } else if (lancamentoAtivo == false) {
+                    System.out.println("Atenção!!! É necessário lançar os dados antes de selecionar as casas!!!\n");
+                    System.out.println();
+                } else if (casasFechamento[Integer.parseInt(opcao) - 1] == true) {
+                    System.out.println("Atenção!!! Esta casa já se encontra fechada, informe outra.");
                     System.out.println();
                     System.out.print("Casas selecionadas ");
                     for (int i = 0; i < contadorCasas; i++) {
@@ -145,16 +160,6 @@ public class FecheACaixa {
                         // informados
                     }
                     System.out.println("\n");
-                    // tabuleiroDemonstrativo[Integer.parseInt(opcao) - 1] = " < " +
-                    // tabuleiro[Integer.parseInt(opcao) - 1]
-                    // + " > ";
-                    // mostrarTabuleiro(tabuleiroDemonstrativo);
-                } else if (lancamentoAtivo == false) {
-                    System.out.println("Atenção!!! É necessário lançar os dados antes de selecionar as casas!!!\n");
-                    System.out.println();
-                } else if (casasFechamento[Integer.parseInt(opcao) - 1] == true) {
-                    System.out.println("Atenção!!! Esta casa já se encontra fechada, informe outra.");
-
                 }
 
                 else {
@@ -163,23 +168,25 @@ public class FecheACaixa {
                 }
             }
         }
-        FileWriter fw;
-        fw = new FileWriter("placar.txt", true);
+        if (abandonouPartida == false) {
+            FileWriter fw;
+            fw = new FileWriter("placar.txt", true);
 
-        LineNumberReader lnr = new LineNumberReader(new FileReader("placar.txt"));
-        try {
-            lnr.skip(Long.MAX_VALUE);
-        } catch (java.io.IOException ioe) {
-            ioe.printStackTrace();
+            LineNumberReader lnr = new LineNumberReader(new FileReader("placar.txt"));
+            try {
+                lnr.skip(Long.MAX_VALUE);
+            } catch (java.io.IOException ioe) {
+                ioe.printStackTrace();
+            }
+            // System.out.println(lnr.getLineNumber());
+            if (lnr.getLineNumber() < 10) {
+                Placar.adiciona("placar.txt", nomeJogador, pontuacao, lnr.getLineNumber());
+            } else {
+                Placar.atualiza("placar.txt", nomeJogador, pontuacao);
+            }
+            Placar.mostra("placar.txt");
+            fw.close();
         }
-        // System.out.println(lnr.getLineNumber());
-        if (lnr.getLineNumber() < 10) {
-            Placar.adiciona("placar.txt", nomeJogador, pontuacao, lnr.getLineNumber());
-        } else {
-            Placar.atualiza("placar.txt", nomeJogador, pontuacao);
-        }
-        Placar.mostra("placar.txt");
-        fw.close();
     }
 
     public static int gerarNumeroAleatorio(int minimo, int maximo) {
