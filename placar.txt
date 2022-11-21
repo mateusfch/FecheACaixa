@@ -1,5 +1,8 @@
-antony;28
-julho;44
-da;77
-laurel;96
-paula;131
+carlos;0
+naevis;2
+wendy;32
+karina;40
+devis;44
+bob esponja;47
+gisele;48
+rener;121

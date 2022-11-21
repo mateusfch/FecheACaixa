@@ -1,3 +1,5 @@
+
+// NÃO ESQUECER DE MOSTRAR A PONTUAÇÃO DURANTE A PARTIDA
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileReader;
@@ -72,6 +74,8 @@ public class FecheACaixa {
                     } else {
                         pontuacao += somaDados;
                         lancamentoAtivo = false;
+                        System.out.println("Sua pontuação no momento é: " + pontuacao + "\n");
+
                     }
                 } else if (opcao.trim().toUpperCase().equals("F") || opcao.trim().toUpperCase().equals("FECHAR")) {
                     if (lancamentoAtivo == false) {
@@ -108,6 +112,7 @@ public class FecheACaixa {
                             System.out.println();
                             somaDados = 0;
                             lancamentoAtivo = false;
+                            System.out.println("Sua pontuação no momento é: " + pontuacao + "\n");
                         }
                         somaCaixas = 0;
                         contadorCasas = 0;
@@ -147,6 +152,8 @@ public class FecheACaixa {
                     } else {
                         System.out.println("Atenção!!! Casa já selecionada!!!\n");
                     }
+                } else if (Integer.parseInt(opcao) < 1 || Integer.parseInt(opcao) > 9) {
+                    System.out.println("O número da caixa informado não é válido, tente novamente!!!");
                 } else if (lancamentoAtivo == false) {
                     System.out.println("Atenção!!! É necessário lançar os dados antes de selecionar as casas!!!\n");
                     System.out.println();
