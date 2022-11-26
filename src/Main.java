@@ -11,7 +11,7 @@ public class Main {
   public static void main(String[] args) throws java.io.IOException {
     Scanner in = new Scanner(System.in);
 
-    System.out.println("------ FECHE A CAIXA -----\n");
+    System.out.println("------ FECHE A CAIXA ------\n");
     System.out.println("Nome do jogador: ");
     String nomeJogador = in.next();
 
