@@ -158,7 +158,7 @@ public class FecheACaixa {
                     } else {
                         if (somaCaixas != somaDados && somaDados != 0 || somaCaixas == 0) {
                             System.out.println(
-                                    "Jogada Inválida!!!\nA soma dos dados não condiz com a(s) casa(s) que deseja fechar.");
+                                    "Jogada Inválida!!!\nO valor do(s) dado(s) não condiz com a(s) casa(s) que deseja fechar.");
                             somaCaixas = 0;
                             System.out.println();
                         } else if (somaDados == 0) {
