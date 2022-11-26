@@ -1,10 +1,10 @@
 import java.util.Scanner;
 
 /**
- * A classe Main é responsável pela execução do programa em si.
+ * A classe Main é responsável pela execução do programa.
  * 
- * @author Mateus Freitas Charloto.
- * @version Versão 27 nov. 2022.
+ * @author Mateus Freitas Charloto
+ * @version 26 nov. 2022
  */
 
 public class Main {

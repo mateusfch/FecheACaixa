@@ -6,6 +6,13 @@ import java.io.IOException;
 import java.io.LineNumberReader;
 import java.util.Random;
 
+/**
+ * Classe contendo a implementação do jogo Feche A Caixa.
+ *
+ * @author Mateus Freitas Charloto
+ * @version 26 nov. 2022
+ */
+
 public class FecheACaixa {
     private String nomeJog;
     private int pontuacao;
@@ -39,7 +46,6 @@ public class FecheACaixa {
         } catch (java.io.IOException ioe) {
             ioe.printStackTrace();
         }
-        // System.out.println(lnr.getLineNumber());
         if (lnr.getLineNumber() < 10) {
             Placar.adiciona("placar.txt", nomeJog, pontuacao, lnr.getLineNumber());
         } else {
@@ -78,7 +84,7 @@ public class FecheACaixa {
             String opcao = in.next();
             Scanner scanner = new Scanner(opcao);
 
-            // Para o caso de a entrada não ser um número inteiro
+            // Para o caso de a entrada não ser um número inteiro:
             if (scanner.hasNextInt() == false) {
 
                 if (lancamentoAtivo == false
@@ -168,7 +174,7 @@ public class FecheACaixa {
 
             }
 
-            // Para o caso a entrada seja um inteiro:
+            // Para o caso de a entrada ser um número inteiro:
             else {
                 if (lancamentoAtivo == true && Integer.parseInt(opcao) >= 1 && Integer.parseInt(opcao) <= 9
                         && casasFechamento[Integer.parseInt(opcao) - 1] == false) {
@@ -216,12 +222,11 @@ public class FecheACaixa {
     }
 
     /**
-     * Gera um número inteiro aleatório dentro do intervalo específico
+     * Gera um número inteiro aleatório dentro do intervalo especificado
      * 
-     * @param minimo O menor número inteiro possível a ser sorteado (inclusive)
-     * @param maximo O maior número inteiro possível a ser sorteado (inclusive)
-     * @return Número inteiro aleatório sorteado dentro do intervalo especificado
-     *         (<code>int</code>).
+     * @param minimo O menor número inteiro possível a ser sorteado (inclusive).
+     * @param maximo O maior número inteiro possível a ser sorteado (inclusive).
+     * @return Número inteiro aleatório sorteado dentro do intervalo especificado.
      */
     public static int gerarNumeroAleatorio(int minimo, int maximo) {
         Random random = new Random();
@@ -229,9 +234,10 @@ public class FecheACaixa {
     }
 
     /**
-     * Imprime o tabuleiro, que é um array do tipo vetor.
+     * Imprime o tabuleiro, que é um array do tipo vetor. Não há return nesse
+     * método.
      * 
-     * @param m Tabuleiro (vetor) a ser impresso.
+     * @param m Tabuleiro (do tipo vetor) a ser impresso.
      */
     public static void mostrarTabuleiro(String[] m) {
         for (int i = 0; i < m.length; i++) {
@@ -240,33 +246,15 @@ public class FecheACaixa {
     }
 
     /**
-     * Soma todos os elementos de um vetor (completamente preenchido) de inteiros.
-     * Este m&eacute;todo utiliza o m&eacute;todo <code>soma</code> para um vetor
-     * parcial.
+     * Realiza a busca de uma determinada string em um vetor de strings.
      * 
-     * @param v Vetor cujos elementos devem ser somados.
-     * @return Somatório dos elementos do vetor (<code>int</code>).
+     * @param v Vetor em que será buscada a string.
+     * @param t Tamanho do vetor em que será buscada a string.
+     * @param n String que será buscada no vetor em questão.
+     * @return Retorna-se um booleano: se de valor true, significa que o elemento
+     *         se encontra no vetor, se de valor false, o elemento não se encontra
+     *         no vetor .
      */
-    public static int somaVetor(int[] v) {
-        return somaVetor(v, v.length);
-    }
-
-    /**
-     * Soma os elementos de um vetor parcialmente preenchido de inteiros.
-     * 
-     * @param v Vetor cujos elementos devem ser somados.
-     * @param t Tamanho do vetor parcial (ou seja, número de elementos que
-     *          ser&atilde;o somados).
-     * @return Somatório dos elementos do vetor parcial (<code>int</code>).
-     */
-    public static int somaVetor(int[] v, int t) {
-        int soma = 0;
-        for (int i = 0; i < t; i++) {
-            soma = soma + v[i];
-        }
-        return soma;
-    }
-
     public static boolean busca(String[] v, int t, String n) {
         for (int i = 0; i < t; i++) {
             if (v[i].equals(n)) {
@@ -277,6 +265,15 @@ public class FecheACaixa {
 
     }
 
+    /**
+     * Realiza a busca de um booleano em um vetor de booleanos.
+     * 
+     * @param v Vetor em que será buscado o valor booleano.
+     * @param t Tamanho do vetor em que será buscado o valor booleano.
+     * @param n Valor booleano será buscado no vetor.
+     * @return Retorna-se um número inteiro que informa o número de ocorrências do
+     *         valor booleano no vetor em questão.
+     */
     public static int buscaBoolean(boolean[] v, int t, boolean n) {
         int contador = 0;
         for (int i = 0; i < t; i++) {

@@ -5,13 +5,24 @@ import java.io.FileWriter;
 
 /**
  * A classe Placar é responsável por adicionar jogadores no placar e também
- * atualizá-lo conforme a entrada de novas pontuações.
+ * atualizar esse placar conforme a entrada de novas pontuações, mas somente
+ * caso seja necessário.
  * 
- * @author Mateus Freitas Charloto.
- * @version Versão 27 nov. 2022.
+ * @author Mateus Freitas Charloto
+ * @version 26 nov. 2022
  */
 
 public class Placar {
+
+  /**
+   * Ordena um vetor de inteiros de maneira crescente e, com base nisso, ordena um
+   * vetor de strings associado a esse vetor de inteiros. Não há return nesse
+   * método.
+   * 
+   * @param v  Vetor de inteiros a ser ordenado.
+   * @param v2 Vetor de strings que será ordenado com base na ordenação do vetor
+   *           de inteiros.
+   */
   public static void bubbleSort(int[] v, String[] v2) {
     for (int i = 0; i < v.length; i++) {
       for (int m = 0; m < v.length; m++) {
@@ -27,6 +38,13 @@ public class Placar {
     }
   }
 
+  /**
+   * Exibe um placar contendo o nome do jogador e a sua pontuação obtida no jogo.
+   * Não há return nesse método.
+   * 
+   * @param arquivo String com o placar a ser exibido.
+   * 
+   */
   public static void mostra(String arquivo) throws FileNotFoundException {
     Scanner inFile = new Scanner(new File(arquivo));
     System.out.println("\n--Placar ------");
@@ -48,6 +66,15 @@ public class Placar {
     inFile.close();
   }
 
+  /**
+   * Adiciona no placar o nome do jogador e a pontuação que ele obteve no jogo.
+   * Não há return nesse método.
+   * 
+   * @param arquivo   Arquivo em que serão registrados os dados.
+   * @param nome      Nome do jogador.
+   * @param pontos    Pontos obtidos no jogo durante a partida.
+   * @param numLinhas Número de linhas do placar até então.
+   */
   public static void adiciona(String arquivo, String nome, int pontos, int numLinhas) throws FileNotFoundException {
     try {
       FileWriter fw;
@@ -89,10 +116,19 @@ public class Placar {
     }
   }
 
+  /**
+   * Verifica se o enésimo jogador (n>=11) está apto ou
+   * não a figurar no placar. Caso esteja, é registrado no placar; do contrário,
+   * fica de reserva na décima primeira posição do vetor de names e do vetor de
+   * scores, não sendo registrado e podendo ser substituído.
+   * 
+   * @param nomeArquivo Arquivo que será atualizado.
+   * @param nome        Nome do jogador.
+   * @param pontos      Pontos do jogador.
+   */
   public static void atualiza(String nomeArquivo, String nome, int pontos) throws FileNotFoundException {
     int contador = 0;
     int[] scores = new int[11];
-
     String[] names = new String[11];
     Scanner inFile = new Scanner(new File(nomeArquivo));
 
