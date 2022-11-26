@@ -85,13 +85,12 @@ public class FecheACaixa {
      * Inicia uma partida no jogo Feche a Caixa.
      */
     public void jogar() throws IOException, java.io.FileNotFoundException {
-        System.out.println("------ FECHE A CAIXA -----");
+        System.out.println();
         boolean[] casasFechamento = { false, false, false, false, false, false, false, false, false };
         String[] casasInformadas = new String[10];
         int[] casasInformadasIndices = new int[10];
         int contadorCasas = 0;
         pontuacao = 0;
-        System.out.print("Nome do jogador: ");
         boolean abandonouPartida = false, lancamentoAtivo = false;
         int dado1 = 0, dado2 = 0, somaDados = 0, somaCaixas = 0, contador = 0;
 
