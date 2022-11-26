@@ -3,8 +3,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 
-public class Placar {
+/**
+ * A classe Placar é responsável por adicionar jogadores no placar e também
+ * atualizá-lo conforme a entrada de novas pontuações.
+ * 
+ * @author Mateus Freitas Charloto.
+ * @version Versão 27 nov. 2022.
+ */
 
+public class Placar {
   public static void bubbleSort(int[] v, String[] v2) {
     for (int i = 0; i < v.length; i++) {
       for (int m = 0; m < v.length; m++) {
@@ -41,17 +48,6 @@ public class Placar {
     inFile.close();
   }
 
-  // public static void adiciona(String arquivo, String nome, int pontos) throws
-  // FileNotFoundException {
-  // try {
-  // FileWriter fw;
-  // fw = new FileWriter(arquivo, true);
-  // fw.write(nome + ";" + pontos + "\n");
-  // fw.close();
-  // } catch (Exception e) {
-  // System.out.println("Erro " + e.getMessage());
-  // }
-  // }
   public static void adiciona(String arquivo, String nome, int pontos, int numLinhas) throws FileNotFoundException {
     try {
       FileWriter fw;

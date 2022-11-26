@@ -1,8 +1,1 @@
-carlos;0
-naevis;2
-wendy;32
-karina;40
-devis;44
-bob esponja;47
-gisele;48
-rener;121
+carlos;35
