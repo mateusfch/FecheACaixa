@@ -5,7 +5,7 @@ Implementação em Java do jogo Feche a Caixa com persistência de pontuação p
 2) [3], [2] e [9]
 3) [4], [1] e [9]
 4) [5], [8] e [1]
-5) [5], [4], [3] e [2], 
+5) [5], [4], [3] e [2]
 6) [6], [1], [2], [5], *entre outras possibilidades.*
 
 ## Funcionalidades
