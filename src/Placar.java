@@ -40,7 +40,6 @@ public class Placar {
 
   /**
    * Exibe um placar contendo o nome do jogador e a sua pontuação obtida no jogo.
-   * Não há return nesse método.
    * 
    * @param arquivo String com o placar a ser exibido.
    * 
@@ -68,7 +67,6 @@ public class Placar {
 
   /**
    * Adiciona no placar o nome do jogador e a pontuação que ele obteve no jogo.
-   * Não há return nesse método.
    * 
    * @param arquivo   Arquivo em que serão registrados os dados.
    * @param nome      Nome do jogador.

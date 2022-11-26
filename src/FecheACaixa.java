@@ -19,20 +19,41 @@ public class FecheACaixa {
     private FileWriter fw;
     final String[] tabuleiro = { "[1]", "[2]", "[3]", "[4]", "[5]", "[6]", "[7]", "[8]", "[9]" };
 
+    /**
+     * Método construtor.
+     * 
+     * @param nJ Nome do jogador.
+     */
     public FecheACaixa(String nJ) {
         nomeJog = nJ;
+        pontuacao = 0;
     }
 
     Scanner in = new Scanner(System.in);
 
+    /**
+     * Obtém o nome do jogador.
+     * 
+     * @return Retorna uma string relativa ao nome do jogador.
+     */
     public String obtemJogador() {
         return nomeJog;
     }
 
+    /**
+     * Obtém a pontuação do jogador.
+     * 
+     * @return Retorna um inteiro relativo à pontuação do jogador.
+     */
     public int obtemPontuacao() {
         return pontuacao;
     }
 
+    /**
+     * Confere o número de linhas do placar e, a partir disso, determina se o
+     * jogador será automaticamente adicionado no placar ou se irá ser feita uma
+     * verificação para ver se ele deve entrar (atualização).
+     */
     public void concluiu() throws java.io.FileNotFoundException {
         try {
             fw = new FileWriter("placar.txt", true);
@@ -60,6 +81,9 @@ public class FecheACaixa {
 
     }
 
+    /**
+     * Inicia uma partida no jogo Feche a Caixa.
+     */
     public void jogar() throws IOException, java.io.FileNotFoundException {
         System.out.println("------ FECHE A CAIXA -----");
         boolean[] casasFechamento = { false, false, false, false, false, false, false, false, false };
@@ -234,8 +258,7 @@ public class FecheACaixa {
     }
 
     /**
-     * Imprime o tabuleiro, que é um array do tipo vetor. Não há return nesse
-     * método.
+     * Imprime o tabuleiro, que é um array do tipo vetor.
      * 
      * @param m Tabuleiro (do tipo vetor) a ser impresso.
      */
@@ -252,8 +275,8 @@ public class FecheACaixa {
      * @param t Tamanho do vetor em que será buscada a string.
      * @param n String que será buscada no vetor em questão.
      * @return Retorna-se um booleano: se de valor true, significa que o elemento
-     *         se encontra no vetor, se de valor false, o elemento não se encontra
-     *         no vetor .
+     *         (string) se encontra no vetor, se de valor false, o elemento não se
+     *         encontra no vetor.
      */
     public static boolean busca(String[] v, int t, String n) {
         for (int i = 0; i < t; i++) {
@@ -270,7 +293,7 @@ public class FecheACaixa {
      * 
      * @param v Vetor em que será buscado o valor booleano.
      * @param t Tamanho do vetor em que será buscado o valor booleano.
-     * @param n Valor booleano será buscado no vetor.
+     * @param n Valor booleano que será buscado no vetor.
      * @return Retorna-se um número inteiro que informa o número de ocorrências do
      *         valor booleano no vetor em questão.
      */
