@@ -1,6 +1,6 @@
 ## Feche a Caixa
 
-Implementação em Java do jogo Feche a Caixa com persistência de pontuação para o trabalho final da disciplina Fundamentos da Programação, ministrada pelo professor Roland Teodorowitsch. Neste jogo, tem-se como objetivo fechar as 9 caixas do tabuleiro obtendo-se a menor pontuação possível. Para tal, são sorteados, até que sejam fechadas as caixas 7,8 e 9, dois dados de 9 faces cada um, e após serem fechadas tais casas, sorteia-se apenas um dado. A partir da soma dos dados ou do número do dado, o jogador deve determinar que casa(s) fechar, lembrando de coincidir os números, no caso de haver essa possibilidade. Assim, se forem sorteadas, por exemplo, as faces 5 e 9, o jogador poderá fechar no tabuleiro: 
+Implementação em Java do jogo Feche a Caixa com persistência de pontos para o trabalho final da disciplina Fundamentos da Programação, ministrada pelo professor Roland Teodorowitsch. Neste jogo, tem-se como objetivo fechar as 9 caixas do tabuleiro obtendo-se a menor pontuação possível. Para tal, são sorteados, até que sejam fechadas as caixas 7,8 e 9, dois dados de 9 faces cada um, e após serem fechadas tais casas, sorteia-se apenas um dado. A partir da soma dos dados ou do número do dado, o jogador deve determinar que casa(s) fechar, lembrando de coincidir os números, no caso de haver essa possibilidade. Assim, se forem sorteadas, por exemplo, as faces 5 e 9, o jogador poderá fechar no tabuleiro: 
 1) [5] e [9]
 2) [3], [2] e [9]
 3) [4], [1] e [9]
