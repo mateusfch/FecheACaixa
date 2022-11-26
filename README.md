@@ -1,6 +1,6 @@
 ## Feche a Caixa
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Trabalho final da disciplina de Fundamentos da Programação, ministrada pelo professor Roland Teodorowitsch, que consistiu na implementação do jogo Feche A Caixa. Neste jogo, tem-se como objetivo fechar as 9 caixas do tabuleiro obtendo-se a menor pontuação possível. Para tal, são sorteados, até que sejam fechadas as caixas 7,8 e 9, dois dados, a partir dos quais o jogador determina quais casas deverão ser fechadas, caso haja essa possibilidade; do contrário, a soma dos dados é acumulada em sua pontuação. 
 
 ## Folder Structure
 
