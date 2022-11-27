@@ -12,9 +12,9 @@ Java implementation of the game "Feche a Caixa" for the course "Fundamentos da P
 
 ## Features
 The player is able to:
-* Insert the name and start a match.
+* Insert his/her name and start a match.
 * End up a match at any moment.
-* Visualize the score and the state of the board.
+* Visualize his/her score and the state of the board.
 * Roll the dice.
 * Select which box(es) will be closed or accumulate the obtained value in the dice rolling in his/her score.
 
