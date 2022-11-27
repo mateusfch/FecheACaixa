@@ -1,17 +1,21 @@
 ## Feche a Caixa
 
-Implementação em Java do jogo Feche a Caixa para o trabalho final da disciplina Fundamentos da Programação, ministrada pelo professor Roland Teodorowitsch. Neste jogo, tem-se como objetivo fechar as 9 caixas do tabuleiro obtendo-se a menor pontuação possível. Para tal, são sorteados, até que sejam fechadas as caixas 7,8 e 9, dois dados de 9 faces cada um, e após serem fechadas tais casas, sorteia-se apenas um dado. A partir da soma dos dados ou do número do dado, o jogador deve determinar que casa(s) fechar, lembrando de coincidir os números, no caso de haver essa possibilidade. Assim, se forem sorteadas, por exemplo, as faces 5 e 9, o jogador poderá fechar no tabuleiro: 
-1) [5] e [9]
-2) [3], [2] e [9]
-3) [4], [1] e [9]
-4) [5], [8] e [1]
-5) [5], [4], [3] e [2]
-6) [6], [1], [2], [5], *entre outras possibilidades.*
+Java implementation of the game "Feche a Caixa" for the course "Fundamentos da Programação", run by professor Roland Teodorowitsch. In this game, the main goal is to close the 9 boxes on the board obtaining the lower score possible. In order to do this, will be rolled - until the moment boxes 7, 8 and 9 be closed - two dice (both D9), and as long as these boxes are closed, only one will be rolled. Considering the sum of the dice or its value (when there is only one dice), the player needs to choose which box(es) to close, having in mind the numbers obligatorily must coincide. Thus, if the result of the dice rolling is, for example, 5 and 9, he/she is able to close in the board:
 
-## Funcionalidades
-* Fornecer nome e iniciar uma partida.
-* Encerrar uma partida a qualquer momento.
-* Visualizar os pontos e o estado atual do tabuleiro.
-* Lançar dado(s).
-* Selecionar quais casas deverão ser fechadas ou acumular o valor sorteado no(s) dado(s) na pontuação.
-* Persistência de um placar com espaço para as 10 melhores pontuações, ordenadas de forma crescente.
+1) [5] and [9]
+2) [3], [2] and [9]
+3) [4], [1] and [9]
+4) [5], [8] and [1]
+5) [5], [4], [3] and [2]
+6) [6], [1], [2], [5], *among other possibilities...*
+
+
+## Features
+The player is able to:
+* Insert the name and start a ring.
+* End up a ring at any moment.
+* Visualize the score and the state of the board
+* Roll the two dice 
+* Select which box(es) will be closed or accumulate the obtained value in the dice rolling in his/her score.
+
+Furthermore, this implementation has a *persistent ranking*, which stores the best 10 scores with the player's name.
