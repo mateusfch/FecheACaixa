@@ -15,7 +15,7 @@ The player is able to:
 * Insert the name and start a match.
 * End up a match at any moment.
 * Visualize the score and the state of the board.
-* Roll the two dice.
+* Roll the dice.
 * Select which box(es) will be closed or accumulate the obtained value in the dice rolling in his/her score.
 
 Furthermore, this implementation has a *persistent ranking*, which stores the best 10 scores with the player's name.
