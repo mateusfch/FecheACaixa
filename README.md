@@ -12,10 +12,10 @@ Java implementation of the game "Feche a Caixa" for the course "Fundamentos da P
 
 ## Features
 The player is able to:
-* Insert the name and start a ring.
-* End up a ring at any moment.
-* Visualize the score and the state of the board
-* Roll the two dice 
+* Insert the name and start a match.
+* End up a match at any moment.
+* Visualize the score and the state of the board.
+* Roll the two dice.
 * Select which box(es) will be closed or accumulate the obtained value in the dice rolling in his/her score.
 
 Furthermore, this implementation has a *persistent ranking*, which stores the best 10 scores with the player's name.
